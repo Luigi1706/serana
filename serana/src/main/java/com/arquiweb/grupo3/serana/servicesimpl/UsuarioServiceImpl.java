@@ -7,8 +7,10 @@ import com.arquiweb.grupo3.serana.repositories.UsuarioRepository;
 import com.arquiweb.grupo3.serana.services.AuthorityService;
 import com.arquiweb.grupo3.serana.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,6 +59,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 null,
                 usuarioDTO.getCorreo(),
                 new BCryptPasswordEncoder().encode(usuarioDTO.getContrasenia()),
+                LocalDateTime.now(),
                 true,
                 null,
                 null,
