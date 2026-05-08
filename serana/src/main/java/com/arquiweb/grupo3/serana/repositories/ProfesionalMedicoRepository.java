@@ -30,4 +30,6 @@ public interface ProfesionalMedicoRepository extends JpaRepository<ProfesionalMe
         LIMIT 10
     """, nativeQuery = true)
     List<ProfesionalMedico> obtenerTopProfesionales(); //SQL
+
+    ProfesionalMedico findByUsuarioId(Long id); //Query Method
 }
