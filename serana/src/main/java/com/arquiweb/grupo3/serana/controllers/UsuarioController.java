@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/arqui_serana")  // El grupo de peticiones que se van a escuchar con este Controller
-// http://localhost:8080/arqui_serana
+@RequestMapping("/arqui_serana")
+
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
