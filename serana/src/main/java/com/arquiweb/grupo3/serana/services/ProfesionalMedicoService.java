@@ -6,16 +6,14 @@ import com.arquiweb.grupo3.serana.entities.ProfesionalMedico;
 import java.util.List;
 
 public interface ProfesionalMedicoService {
-
-    public List<ProfesionalMedico> findAll();
-
-    public ProfesionalMedico findById(Long id);
-
-    public ProfesionalMedico findByUsuarioId(Long idUsuario);
-
-    public ProfesionalMedicoDTO add(ProfesionalMedicoDTO dto);
-
-    public ProfesionalMedicoDTO update(ProfesionalMedicoDTO dto);
-
-    public void delete(Long id);
+    List<ProfesionalMedico> findAll();
+    ProfesionalMedico findById(Long id);
+    ProfesionalMedico findByUsuarioId(Long idUsuario);
+    List<ProfesionalMedico> findByEspecialidad(String especialidad);
+    List<ProfesionalMedico> buscarPorNombre(String termino);
+    List<ProfesionalMedico> findDisponiblesPorEspecialidad(String especialidad);
+    List<String> listarEspecialidades();
+    ProfesionalMedicoDTO add(ProfesionalMedicoDTO dto);
+    ProfesionalMedicoDTO update(ProfesionalMedicoDTO dto);
+    void delete(Long id);
 }

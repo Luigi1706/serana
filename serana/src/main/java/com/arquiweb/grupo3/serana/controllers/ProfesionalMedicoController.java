@@ -16,77 +16,65 @@ import java.util.List;
 public class ProfesionalMedicoController {
 
     @Autowired
-    ProfesionalMedicoService profesionalMedicoService;
+    private ProfesionalMedicoService profesionalMedicoService;
 
     @GetMapping("/profesionales")
-    public ResponseEntity<List<ProfesionalMedico>> findAll(){
-
-        List<ProfesionalMedico> profesionales =
-                profesionalMedicoService.findAll();
-
-        return new ResponseEntity<>(
-                profesionales,
-                HttpStatus.OK);
+    public ResponseEntity<List<ProfesionalMedico>> findAll() {
+        return new ResponseEntity<>(profesionalMedicoService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/profesionales/{id}")
-    public ResponseEntity<ProfesionalMedico> findById(
-            @PathVariable Long id){
+    public ResponseEntity<ProfesionalMedico> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(profesionalMedicoService.findById(id), HttpStatus.OK);
+    }
 
-        ProfesionalMedico found =
-                profesionalMedicoService.findById(id);
-
-        if(found == null){
-            return new ResponseEntity<>(
-                    HttpStatus.NOT_FOUND);
-        }
-
+    @GetMapping("/profesionales/usuario/{idUsuario}")
+    public ResponseEntity<ProfesionalMedico> findByUsuarioId(@PathVariable Long idUsuario) {
         return new ResponseEntity<>(
-                found,
+                profesionalMedicoService.findByUsuarioId(idUsuario), HttpStatus.OK);
+    }
+
+    @GetMapping("/profesionales/especialidad")
+    public ResponseEntity<List<ProfesionalMedico>> findByEspecialidad(
+            @RequestParam String nombre) {
+        return new ResponseEntity<>(
+                profesionalMedicoService.findByEspecialidad(nombre), HttpStatus.OK);
+    }
+
+    @GetMapping("/profesionales/buscar")
+    public ResponseEntity<List<ProfesionalMedico>> buscarPorNombre(
+            @RequestParam String termino) {
+        return new ResponseEntity<>(
+                profesionalMedicoService.buscarPorNombre(termino), HttpStatus.OK);
+    }
+
+    @GetMapping("/profesionales/disponibles")
+    public ResponseEntity<List<ProfesionalMedico>> findDisponiblesByEspecialidad(
+            @RequestParam String especialidad) {
+        return new ResponseEntity<>(
+                profesionalMedicoService.findDisponiblesPorEspecialidad(especialidad),
                 HttpStatus.OK);
+    }
+
+    @GetMapping("/profesionales/especialidades")
+    public ResponseEntity<List<String>> listarEspecialidades() {
+        return new ResponseEntity<>(
+                profesionalMedicoService.listarEspecialidades(), HttpStatus.OK);
     }
 
     @PostMapping("/profesionales")
-    public ResponseEntity<ProfesionalMedicoDTO> add(
-            @RequestBody ProfesionalMedicoDTO dto){
-
-        ProfesionalMedicoDTO created =
-                profesionalMedicoService.add(dto);
-
-        if(created == null){
-            return new ResponseEntity<>(
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(
-                created,
-                HttpStatus.CREATED);
+    public ResponseEntity<ProfesionalMedicoDTO> add(@RequestBody ProfesionalMedicoDTO dto) {
+        return new ResponseEntity<>(profesionalMedicoService.add(dto), HttpStatus.CREATED);
     }
 
     @PutMapping("/profesionales")
-    public ResponseEntity<ProfesionalMedicoDTO> update(
-            @RequestBody ProfesionalMedicoDTO dto){
-
-        ProfesionalMedicoDTO updated =
-                profesionalMedicoService.update(dto);
-
-        if(updated == null){
-            return new ResponseEntity<>(
-                    HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(
-                updated,
-                HttpStatus.OK);
+    public ResponseEntity<ProfesionalMedicoDTO> update(@RequestBody ProfesionalMedicoDTO dto) {
+        return new ResponseEntity<>(profesionalMedicoService.update(dto), HttpStatus.OK);
     }
 
     @DeleteMapping("/profesionales/{id}")
-    public ResponseEntity<Void> delete(
-            @PathVariable Long id){
-
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         profesionalMedicoService.delete(id);
-
-        return new ResponseEntity<>(
-                HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

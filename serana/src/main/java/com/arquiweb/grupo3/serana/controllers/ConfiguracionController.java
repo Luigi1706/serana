@@ -12,39 +12,28 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RequestMapping("/arqui_serana")
 public class ConfiguracionController {
+
     @Autowired
-    ConfiguracionService configuracionService;
+    private ConfiguracionService configuracionService;
 
     @GetMapping("/configuraciones/{id}")
     public ResponseEntity<Configuracion> findById(@PathVariable Long id) {
-        Configuracion found = configuracionService.findById(id);
-        if (found == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(found, HttpStatus.OK);
+        return new ResponseEntity<>(configuracionService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/configuraciones/usuario/{usuarioId}")
     public ResponseEntity<Configuracion> findByUsuarioId(@PathVariable Long usuarioId) {
-        Configuracion found = configuracionService.findByUsuarioId(usuarioId);
-        if (found == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(found, HttpStatus.OK);
+        return new ResponseEntity<>(
+                configuracionService.findByUsuarioId(usuarioId), HttpStatus.OK);
     }
 
     @PostMapping("/configuraciones")
     public ResponseEntity<ConfiguracionDTO> add(@RequestBody ConfiguracionDTO configuracionDTO) {
-        ConfiguracionDTO newConfig = configuracionService.add(configuracionDTO);
-        return new ResponseEntity<>(newConfig, HttpStatus.CREATED);
+        return new ResponseEntity<>(configuracionService.add(configuracionDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/configuraciones")
     public ResponseEntity<ConfiguracionDTO> update(@RequestBody ConfiguracionDTO configuracionDTO) {
-        ConfiguracionDTO updated = configuracionService.update(configuracionDTO);
-        if (updated == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+        return new ResponseEntity<>(configuracionService.update(configuracionDTO), HttpStatus.OK);
     }
 }

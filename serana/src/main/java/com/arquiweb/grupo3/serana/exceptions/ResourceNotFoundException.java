@@ -1,4 +1,4 @@
-package com.arqui.movie.exceptions;
+package com.arquiweb.grupo3.serana.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
 

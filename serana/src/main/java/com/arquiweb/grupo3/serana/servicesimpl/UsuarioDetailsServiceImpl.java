@@ -10,11 +10,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     private UsuarioService usuarioService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new UsuarioSecurity(usuarioService.findByCorreo(username));
+        try {
+            return new UsuarioSecurity(usuarioService.findByCorreo(username));
+        } catch (Exception e) {
+            throw new UsernameNotFoundException(
+                    "No se encontró un usuario con el correo: " + username);
+        }
     }
 }
