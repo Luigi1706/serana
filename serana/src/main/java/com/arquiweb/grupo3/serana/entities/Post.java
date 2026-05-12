@@ -28,12 +28,15 @@ public class Post {
     private Integer cantidadParticipantes;
 
     @JsonIgnore
-    @ToString.Exclude
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     private List<UsuarioPost> usuariosPosts;
 
     @JsonIgnore
-    @ToString.Exclude
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     private List<Comentario> comentarios;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
 }

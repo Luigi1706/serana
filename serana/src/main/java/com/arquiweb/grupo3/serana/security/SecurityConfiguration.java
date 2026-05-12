@@ -91,9 +91,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/arqui_serana/posts/**").hasAnyAuthority("ROLE_ADMIN")
 
                         // --- Comentarios ---
-                        .requestMatchers(HttpMethod.GET, "/arqui_serana/comentarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_PROFESIONAL", "ROLE_PACIENTE")
-                        .requestMatchers(HttpMethod.POST, "/arqui_serana/comentarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_PROFESIONAL", "ROLE_PACIENTE")
-                        .requestMatchers(HttpMethod.DELETE, "/arqui_serana/comentarios/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/serana/comentarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_PROFESIONAL", "ROLE_PACIENTE")
+                        .requestMatchers(HttpMethod.POST, "/serana/comentarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_PROFESIONAL", "ROLE_PACIENTE")
+                        .requestMatchers(HttpMethod.DELETE, "/serana/comentarios/**").hasAnyAuthority("ROLE_ADMIN")
 
                         // --- Recursos Educativos ---
                         .requestMatchers(HttpMethod.GET, "/arqui_serana/recursos/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_PROFESIONAL", "ROLE_PACIENTE")

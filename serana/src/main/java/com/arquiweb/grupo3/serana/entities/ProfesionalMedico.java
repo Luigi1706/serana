@@ -30,12 +30,10 @@ public class ProfesionalMedico {
     private List<Sesion> sesiones;
 
     @JsonIgnore
-    @ToString.Exclude
     @OneToMany(mappedBy = "profesionalMedico", fetch = FetchType.EAGER)
     private List<Horario> horarios;
 
     @JsonIgnore
-    @ToString.Exclude
     @OneToOne
     @JoinColumn(name="id_usuario")
     private Usuario usuario;

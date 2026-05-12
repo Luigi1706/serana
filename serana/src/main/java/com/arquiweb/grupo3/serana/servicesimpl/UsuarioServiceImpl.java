@@ -1,11 +1,12 @@
 package com.arquiweb.grupo3.serana.servicesimpl;
 
 import com.arquiweb.grupo3.serana.dtos.UsuarioDTO;
-import com.arquiweb.grupo3.serana.entities.Authority;
-import com.arquiweb.grupo3.serana.entities.Usuario;
+import com.arquiweb.grupo3.serana.entities.*;
 import com.arquiweb.grupo3.serana.repositories.UsuarioRepository;
 import com.arquiweb.grupo3.serana.services.AuthorityService;
 import com.arquiweb.grupo3.serana.services.UsuarioService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,8 @@ public class UsuarioServiceImpl implements UsuarioService {
                 new BCryptPasswordEncoder().encode(usuarioDTO.getContrasenia()),
                 LocalDateTime.now(),
                 true,
+                null,
+                null,
                 null,
                 null,
                 null,

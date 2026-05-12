@@ -34,15 +34,13 @@ public class UsuarioController {
     @Autowired
     JwtUtilService jwtUtilService;
 
-
-
-    @PostMapping("/usuarios/register")
+    @PostMapping("/usuarios/register") // http://localhost:8080/arqui_serana/usuarios/register
     public ResponseEntity<UsuarioDTO> register(@RequestBody UsuarioDTO usuario) {
         usuario = usuarioService.add(usuario);
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
     }
 
-    @PostMapping("/usuarios/login")
+    @PostMapping("/usuarios/login") // http://localhost:8080/arqui_serana/usuarios/login
     public ResponseEntity<TokenDTO> login(@RequestBody Usuario usuario) {
 
         authenticationManager.authenticate(
@@ -58,11 +56,9 @@ public class UsuarioController {
                 .collect(Collectors.joining(";", "", ""));
 
         return new ResponseEntity<>(new TokenDTO(jwt, id, authorities), HttpStatus.OK);
-
     }
 
-
-    @GetMapping("/usuarios/{id}")
+    @GetMapping("/usuarios/{id}") // http://localhost:8080/arqui_serana/usuarios/1
     public ResponseEntity<Usuario> findById(@PathVariable Long id) {
         Usuario found = usuarioService.findById(id);
         if (found == null) {
