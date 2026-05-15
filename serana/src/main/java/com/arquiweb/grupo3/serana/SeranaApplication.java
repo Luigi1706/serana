@@ -42,7 +42,7 @@ public class SeranaApplication {
 
 			// AUTORITIES
 			Authority admin = authorityRepository.save(new Authority(null, "ROLE_ADMIN", null));
-			Authority user = authorityRepository.save(new Authority(null, "ROLE_USER", null));
+			Authority user = authorityRepository.save(new Authority(null, "ROLE_PACIENTE", null));
 			Authority doctor = authorityRepository.save(new Authority(null, "ROLE_DOCTOR", null));
 
 			// USUARIOS
@@ -60,8 +60,7 @@ public class SeranaApplication {
 			configuracionRepository.save(new Configuracion(null, "claro", "en", false, u2));
 
 			// PACIENTES
-			Paciente p1 = pacienteRepository.save(new Paciente(null, "Ana", "Lopez", 'F',
-					false, "Ansiosa", 8, null, u1));
+			Paciente p1 = pacienteRepository.save(new Paciente(null, "Ana", "Lopez", 'F', "Ansiosa", 8, null, u1));
 
 			// PROFESIONALES
 			ProfesionalMedico prof1 = profesionalRepository.save(new ProfesionalMedico(

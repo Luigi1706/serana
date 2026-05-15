@@ -23,7 +23,6 @@ public class Paciente {
     private String nombres;
     private String apellidos;
     private char genero;
-    private Boolean anonimato;
     private String estadoAnimo;
     private int nivelAnsiedad;
 

@@ -2,10 +2,13 @@ package com.arquiweb.grupo3.serana.servicesimpl;
 
 import com.arquiweb.grupo3.serana.dtos.UsuarioDTO;
 import com.arquiweb.grupo3.serana.entities.Authority;
+import com.arquiweb.grupo3.serana.entities.ProfesionalMedico;
 import com.arquiweb.grupo3.serana.entities.Usuario;
 import com.arquiweb.grupo3.serana.exceptions.ResourceNotFoundException;
 import com.arquiweb.grupo3.serana.repositories.UsuarioRepository;
 import com.arquiweb.grupo3.serana.services.AuthorityService;
+import com.arquiweb.grupo3.serana.services.PacienteService;
+import com.arquiweb.grupo3.serana.services.ProfesionalMedicoService;
 import com.arquiweb.grupo3.serana.services.UsuarioService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ValidationException;
@@ -24,6 +27,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private AuthorityService authorityService;
+
+    /*
+    @Autowired
+    private PacienteService pacienteService;
+
+    @Autowired
+    private ProfesionalMedicoService profesionalMedicoService;
+     */
 
     /** Bean declarado en SecurityConfiguration — no instanciar manualmente */
     @Autowired
@@ -70,6 +81,16 @@ public class UsuarioServiceImpl implements UsuarioService {
             default -> throw new ValidationException(
                     "tipoPerfil inválido. Use 'PACIENTE' o 'DOCTOR'.");
         };
+
+        /*
+        // Crear un nuevo registro para Paciente o Profesional_Medico
+        if(usuarioDTO.getTipoPerfil().equals("PACIENTE")){
+            pacienteService.add();
+        }
+        else if(usuarioDTO.getTipoPerfil().equals("DOCTOR")){
+            profesionalMedicoService.add();
+        }
+        */
 
         Authority authority = authorityService.findByRol(rolNombre);
         if (authority == null)

@@ -51,7 +51,7 @@ public class SecurityConfiguration {
 
                 // --- Pacientes ---
                 .requestMatchers(HttpMethod.GET,    "/arqui_serana/pacientes/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_PACIENTE")
-                .requestMatchers(HttpMethod.POST,   "/arqui_serana/pacientes/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.POST,   "/arqui_serana/pacientes/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_PACIENTE")
                 .requestMatchers(HttpMethod.PUT,    "/arqui_serana/pacientes/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_PACIENTE")
                 .requestMatchers(HttpMethod.DELETE, "/arqui_serana/pacientes/**").hasAnyAuthority("ROLE_ADMIN")
 

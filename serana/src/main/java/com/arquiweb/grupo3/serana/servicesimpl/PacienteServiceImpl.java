@@ -82,7 +82,6 @@ public class PacienteServiceImpl implements PacienteService {
         paciente.setNombres(dto.getNombres().trim());
         paciente.setApellidos(dto.getApellidos().trim());
         paciente.setGenero(dto.getGenero());
-        paciente.setAnonimato(dto.getAnonimato() != null ? dto.getAnonimato() : false);
         paciente.setEstadoAnimo(dto.getEstadoAnimo());
         paciente.setNivelAnsiedad(dto.getNivelAnsiedad());
         paciente.setUsuario(usuario);
@@ -106,8 +105,6 @@ public class PacienteServiceImpl implements PacienteService {
             found.setApellidos(dto.getApellidos().trim());
         if (dto.getEstadoAnimo() != null && !dto.getEstadoAnimo().isBlank())
             found.setEstadoAnimo(dto.getEstadoAnimo().trim());
-        if (dto.getAnonimato() != null)
-            found.setAnonimato(dto.getAnonimato());
         if (dto.getNivelAnsiedad() >= 0)
             found.setNivelAnsiedad(dto.getNivelAnsiedad());
 

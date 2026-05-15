@@ -22,9 +22,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     List<Paciente> findByNombresContainingIgnoreCaseOrApellidosContainingIgnoreCase(
             String nombres, String apellidos);
 
-    /** QM-P4: Pacientes que prefieren anonimato */
-    List<Paciente> findByAnonimatoTrue();
-
     // ── JPQL ─────────────────────────────────────────────────────────────────
 
     /**

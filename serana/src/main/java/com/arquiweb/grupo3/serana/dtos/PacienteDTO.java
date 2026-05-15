@@ -12,7 +12,6 @@ public class PacienteDTO {
     private String nombres;
     private String apellidos;
     private char genero;
-    private Boolean anonimato;
     private String estadoAnimo;
     private int nivelAnsiedad;
     /** Id del usuario de la plataforma vinculado a este perfil de paciente. */
