@@ -13,7 +13,7 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Long> {
 
     // Contador de comentario respecto de una publicación
     @Query(value = "SELECT COUNT(*) FROM comentarios WHERE id_post = ?1", nativeQuery = true)
-    Long contarComentariosSqlNativo(Long postId);
+    Long contarComentariosDePost(Long postId);
 
     //Obtener todos los comentarios de un post, indicando el autor
     @Query("SELECT DISTINCT c FROM Comentario c " +

@@ -1,7 +1,6 @@
 package com.arquiweb.grupo3.serana.exceptions;
 
 import jakarta.validation.ValidationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

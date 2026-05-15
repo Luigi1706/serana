@@ -45,6 +45,14 @@ public class Usuario {
     private List<UsuarioPost> usuariosPosts;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "usuario", fetch=FetchType.EAGER)
+    private List<Comentario> comentarios;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", fetch=FetchType.EAGER)
+    private List<Post> posts;
+
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="usuarios_authorities",

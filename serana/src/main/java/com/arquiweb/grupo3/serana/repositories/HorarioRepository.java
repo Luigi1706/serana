@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.util.List;
 
-
 public interface HorarioRepository extends JpaRepository<Horario, Long> {
 
     List<Horario> findByProfesionalMedicoId(Long profesionalMedicoId);

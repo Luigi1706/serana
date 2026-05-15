@@ -15,6 +15,8 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/arqui_serana")
+// Controller encargado de gestionar los horarios disponibles de los profesionales médicos:
+// consulta, creación, actualización, reserva y eliminación de franjas de tiempo.
 public class HorarioController {
 
     @Autowired

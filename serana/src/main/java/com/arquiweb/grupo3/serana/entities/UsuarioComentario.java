@@ -20,7 +20,6 @@ public class UsuarioComentario {
     private Long id;
 
     private Boolean liked;
-
     private Boolean comentarista;
 
     @JsonIgnore

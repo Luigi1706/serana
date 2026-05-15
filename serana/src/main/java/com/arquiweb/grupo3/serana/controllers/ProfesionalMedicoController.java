@@ -13,8 +13,9 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/arqui_serana")
+// Controller encargado de gestionar los perfiles de profesionales médicos de Serana:
+// consulta por especialidad, nombre, disponibilidad y CRUD completo.
 public class ProfesionalMedicoController {
-
     @Autowired
     private ProfesionalMedicoService profesionalMedicoService;
 

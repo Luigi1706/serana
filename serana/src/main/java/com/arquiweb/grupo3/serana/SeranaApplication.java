@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,11 +32,13 @@ public class SeranaApplication {
 			UsuarioPostRepository usuarioPostRepository,
 			UsuarioComentarioRepository usuarioComentarioRepository,
 			SesionRepository sesionRepository,
-			RecursosEducativosRepository recursoRepository,
+			RecursoEducativoRepository recursoRepository,
 			SesionRecursoEducativoRepository sesionRecursoRepository,
 			HorarioRepository horarioRepository
 	) {
 		return args -> {
+
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 			// AUTORITIES
 			Authority admin = authorityRepository.save(new Authority(null, "ROLE_ADMIN", null));
@@ -43,14 +46,14 @@ public class SeranaApplication {
 			Authority doctor = authorityRepository.save(new Authority(null, "ROLE_DOCTOR", null));
 
 			// USUARIOS
-			Usuario u1 = usuarioRepository.save(new Usuario(null, "ana@gmail.com", "1234",
-					LocalDateTime.now(), true, null, null, null, null, null, List.of(user)));
+			Usuario u1 = usuarioRepository.save(new Usuario(null, "ana@gmail.com", encoder.encode("1234"),
+					LocalDateTime.now(), true, null, null, null, null, null, null, null, List.of(user)));
 
-			Usuario u2 = usuarioRepository.save(new Usuario(null, "carlos@gmail.com", "1234",
-					LocalDateTime.now(), true, null, null, null, null, null, List.of(doctor)));
+			Usuario u2 = usuarioRepository.save(new Usuario(null, "carlos@gmail.com", encoder.encode("1234"),
+					LocalDateTime.now(), true, null, null, null, null, null, null, null, List.of(doctor)));
 
-			Usuario u3 = usuarioRepository.save(new Usuario(null, "admin@gmail.com", "1234",
-					LocalDateTime.now(), true, null, null, null, null, null, List.of(admin)));
+			Usuario u3 = usuarioRepository.save(new Usuario(null, "admin@gmail.com", encoder.encode("1234"),
+					LocalDateTime.now(), true, null, null, null, null, null, null, null, List.of(admin)));
 
 			// CONFIGURACIONES
 			configuracionRepository.save(new Configuracion(null, "oscuro", "es", true, u1));
@@ -83,6 +86,7 @@ public class SeranaApplication {
 					LocalDateTime.now(),
 					1,
 					null,
+					null,
 					null
 			));
 
@@ -92,6 +96,7 @@ public class SeranaApplication {
 					false,
 					LocalDateTime.now(),
 					2,
+					null,
 					null,
 					null
 			));
@@ -105,14 +110,16 @@ public class SeranaApplication {
 					LocalDateTime.now(),
 					"Te recomiendo técnicas de respiración",
 					null,
-					post1
+					post1,
+					null
 			));
 
 			Comentario c2 = comentarioRepository.save(new Comentario(null,
 					LocalDateTime.now(),
 					"Podrías intentar meditación guiada",
 					null,
-					post2
+					post1,
+					null
 			));
 
 			// USUARIO - COMENTARIO
@@ -143,7 +150,7 @@ public class SeranaApplication {
 			));
 
 			// RECURSOS EDUCATIVOS
-			RecursosEducativos r1 = recursoRepository.save(new RecursosEducativos(null,
+			RecursoEducativo r1 = recursoRepository.save(new RecursoEducativo(null,
 					"Cómo manejar la ansiedad",
 					"Video",
 					"https://youtube.com/ansiedad",
@@ -151,7 +158,7 @@ public class SeranaApplication {
 					null
 			));
 
-			RecursosEducativos r2 = recursoRepository.save(new RecursosEducativos(null,
+			RecursoEducativo r2 = recursoRepository.save(new RecursoEducativo(null,
 					"Técnicas de respiración",
 					"Artículo",
 					"https://blog.com/respiracion",

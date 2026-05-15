@@ -1,23 +1,22 @@
 package com.arquiweb.grupo3.serana.servicesimpl;
 
-import com.arquiweb.grupo3.serana.exceptions.ResourceNotFoundException;
 import com.arquiweb.grupo3.serana.dtos.HorarioDTO;
 import com.arquiweb.grupo3.serana.entities.Horario;
 import com.arquiweb.grupo3.serana.entities.ProfesionalMedico;
+import com.arquiweb.grupo3.serana.exceptions.ResourceNotFoundException;
 import com.arquiweb.grupo3.serana.repositories.HorarioRepository;
 import com.arquiweb.grupo3.serana.services.HorarioService;
 import com.arquiweb.grupo3.serana.services.ProfesionalMedicoService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class HorarioServiceImpl implements HorarioService {
-
     @Autowired
     private HorarioRepository horarioRepository;
 
@@ -25,13 +24,11 @@ public class HorarioServiceImpl implements HorarioService {
     private ProfesionalMedicoService profesionalMedicoService;
 
     @Override
-    @Transactional(readOnly = true)
     public List<Horario> findAll() {
         return horarioRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Horario findById(Long id) {
         return horarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -39,7 +36,6 @@ public class HorarioServiceImpl implements HorarioService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Horario> findByProfesionalMedicoId(Long idProfesional) {
         // Verificar existencia del profesional antes de consultar sus horarios
         profesionalMedicoService.findById(idProfesional);
@@ -47,14 +43,12 @@ public class HorarioServiceImpl implements HorarioService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Horario> findDisponiblesByProfesional(Long idProfesional) {
         profesionalMedicoService.findById(idProfesional);
         return horarioRepository.obtenerHorariosDisponiblesPorProfesional(idProfesional);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Horario> findDisponiblesByEspecialidad(String especialidad) {
         if (especialidad == null || especialidad.isBlank()) {
             throw new ValidationException("La especialidad no puede estar vacía.");
@@ -63,7 +57,6 @@ public class HorarioServiceImpl implements HorarioService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Horario> findByProfesionalEnRango(Long idProfesional,
                                                   LocalDate fechaInicio,
                                                   LocalDate fechaFin) {

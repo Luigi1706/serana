@@ -27,5 +27,5 @@ public class SesionRecursoEducativo {
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="id_recurso_educativo")
-    private RecursosEducativos recursoEducativo;
+    private RecursoEducativo recursoEducativo;
 }

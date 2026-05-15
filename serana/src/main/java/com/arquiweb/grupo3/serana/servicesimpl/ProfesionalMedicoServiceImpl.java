@@ -1,23 +1,22 @@
 package com.arquiweb.grupo3.serana.servicesimpl;
 
-import com.arquiweb.grupo3.serana.exceptions.ResourceNotFoundException;
 import com.arquiweb.grupo3.serana.dtos.ProfesionalMedicoDTO;
 import com.arquiweb.grupo3.serana.entities.ProfesionalMedico;
 import com.arquiweb.grupo3.serana.entities.Sesion;
 import com.arquiweb.grupo3.serana.entities.Usuario;
+import com.arquiweb.grupo3.serana.exceptions.ResourceNotFoundException;
 import com.arquiweb.grupo3.serana.repositories.ProfesionalMedicoRepository;
 import com.arquiweb.grupo3.serana.services.ProfesionalMedicoService;
 import com.arquiweb.grupo3.serana.services.UsuarioService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
-
     @Autowired
     private ProfesionalMedicoRepository profesionalMedicoRepository;
 
@@ -25,13 +24,11 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     private UsuarioService usuarioService;
 
     @Override
-    @Transactional(readOnly = true)
     public List<ProfesionalMedico> findAll() {
         return profesionalMedicoRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public ProfesionalMedico findById(Long id) {
         return profesionalMedicoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -39,7 +36,6 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public ProfesionalMedico findByUsuarioId(Long idUsuario) {
         return profesionalMedicoRepository.findByUsuarioId(idUsuario)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -47,7 +43,6 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<ProfesionalMedico> findByEspecialidad(String especialidad) {
         if (especialidad == null || especialidad.isBlank()) {
             throw new ValidationException("La especialidad de búsqueda no puede estar vacía.");
@@ -56,7 +51,6 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<ProfesionalMedico> buscarPorNombre(String termino) {
         if (termino == null || termino.isBlank()) {
             throw new ValidationException("El término de búsqueda no puede estar vacío.");
@@ -67,7 +61,6 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<ProfesionalMedico> findDisponiblesPorEspecialidad(String especialidad) {
         if (especialidad == null || especialidad.isBlank()) {
             throw new ValidationException("La especialidad no puede estar vacía.");
@@ -76,13 +69,11 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<String> listarEspecialidades() {
         return profesionalMedicoRepository.listarEspecialidadesDisponibles();
     }
 
     @Override
-    @Transactional
     public ProfesionalMedicoDTO add(ProfesionalMedicoDTO dto) {
         validarCamposObligatorios(dto);
 
@@ -111,7 +102,6 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     }
 
     @Override
-    @Transactional
     public ProfesionalMedicoDTO update(ProfesionalMedicoDTO dto) {
         if (dto.getId() == null) {
             throw new ValidationException(
@@ -138,15 +128,14 @@ public class ProfesionalMedicoServiceImpl implements ProfesionalMedicoService {
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
         ProfesionalMedico found = findById(id);
 
         // No eliminar si tiene sesiones en estado "Programada"
         boolean tieneSesionesPendientes = found.getSesiones() != null
                 && found.getSesiones().stream()
-                        .map(Sesion::getEstadoSesion)
-                        .anyMatch("Programada"::equalsIgnoreCase);
+                .map(Sesion::getEstadoSesion)
+                .anyMatch("Programada"::equalsIgnoreCase);
 
         if (tieneSesionesPendientes) {
             throw new ValidationException(

@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface HorarioService {
-
     List<Horario> findAll();
     Horario findById(Long id);
     List<Horario> findByProfesionalMedicoId(Long idProfesional);
